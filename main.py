@@ -13,6 +13,7 @@ startup_extensions = []
 # Create the bot object
 bot = commands.Bot(command_prefix=['steam.'], description=description)
 
+
 @bot.event
 async def on_ready():
     print("© 2017 Electromaster232")
@@ -20,6 +21,7 @@ async def on_ready():
     print(bot.user.name)
     print(bot.user.id)
     print('READY')
+
 
 @bot.command()
 async def load(extension_name: str):
@@ -31,6 +33,7 @@ async def load(extension_name: str):
         return
     await bot.say("The extension {} was loaded.".format(extension_name))
 
+
 @bot.command()
 async def unload(extension_name: str):
     """Unloads an extension."""
@@ -40,12 +43,14 @@ async def unload(extension_name: str):
         await bot.say("There was an error")
     await bot.say("The extension {} was unloaded.".format(extension_name))
 
+
 @bot.command()
 async def reload(extension_name: str):
     """Reloads an extension"""
     bot.unload_extension("cogs.{}".format(extension_name))
     bot.load_extension("cogs.{}".format(extension_name))
     bot.say("The extension {} was reloaded.".format(extension_name))
+
 
 @bot.command()
 async def ping():
@@ -60,6 +65,7 @@ async def owner():
     owner = str((await bot.application_info()).owner)
     em = discord.Embed(description=owner, color=discord.Color.green())
     await bot.say(embed=em)
+
 
 # TODO: Make this less hacky
 @bot.command(pass_context=True)
@@ -80,8 +86,8 @@ async def debug(ctx, *, code):
                 result = await result
             result = str(result)
             await bot.say("```" + result + "```")
-        except Exception as e:
-            await bot.say('{}: {}'.format(type(e).__name__, str(e)))
+        except Exception as error:
+            await bot.say('```{}: {}```'.format(type(error).__name__, str(error)))
             return
     else:
         await bot.say(":no_entry: Access to this command is restricted.")
@@ -95,4 +101,4 @@ if __name__ == "__main__":
             exc = '{}: {}'.format(type(e).__name__, e)
             print('Failed to load extension {}\n{}'.format(extension, exc))
 # Run the bot object with token
-    bot.run('')
+    bot.run('NDIxNDgwMzM3NDk1OTQ5MzM1.DYSo2g.yg7elym4vZV0vlIVn-cEnZMENDs')
