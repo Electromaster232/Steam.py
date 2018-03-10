@@ -101,4 +101,4 @@ if __name__ == "__main__":
             exc = '{}: {}'.format(type(e).__name__, e)
             print('Failed to load extension {}\n{}'.format(extension, exc))
 # Run the bot object with token
-    bot.run('NDIxNDgwMzM3NDk1OTQ5MzM1.DYSo2g.yg7elym4vZV0vlIVn-cEnZMENDs')
+    bot.run('')
