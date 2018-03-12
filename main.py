@@ -17,7 +17,7 @@ bot = commands.Bot(command_prefix=['steam.'], description=description)
 
 
 def ownercheck(ctx):
-    return ctx.message.author.id == "133353440385433600"
+    return ctx.message.author.id == "133353440385433600" or ctx.message.author.id == "209337415473561601"
 
 @bot.event
 async def on_ready():
