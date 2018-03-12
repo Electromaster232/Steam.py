@@ -4,8 +4,9 @@ import logging
 import asyncio
 import traceback
 import sys
+from config import Config
 
-description = '''Steam.py Alpha v0.1'''
+description = '''Steam.py Alpha v2'''
 # Set logging level
 logging.basicConfig(level=logging.ERROR)
 
@@ -13,11 +14,16 @@ logging.basicConfig(level=logging.ERROR)
 startup_extensions = ['cogs.steammain', 'cogs.gameinfo']
 
 # Create the bot object
-bot = commands.Bot(command_prefix=['steam.'], description=description)
+bot = commands.Bot(command_prefix=Config.botprefix, description=description)
 
 
 def ownercheck(ctx):
-    return ctx.message.author.id == "133353440385433600" or ctx.message.author.id == "209337415473561601"
+    for i in Config.botowners:
+        if i == ctx.message.author.id:
+            return True
+        else:
+            return False
+
 
 @bot.event
 async def on_ready():
@@ -157,7 +163,7 @@ async def on_command(command, ctx):
     embed.add_field(name="Server", value=str(ctx.message.server.name), inline=True)
     embed.add_field(name="Author ID", value=str(ctx.message.author.id), inline=True)
     embed.set_footer(text="Steam.py logging system")
-    await bot.send_message(bot.get_channel('422570683600732171'), embed=embed)
+    await bot.send_message(bot.get_channel(Config.loggingchannel), embed=embed)
 
 # Load extensions and start the bot
 if __name__ == "__main__":
@@ -168,4 +174,4 @@ if __name__ == "__main__":
             exc = '{}: {}'.format(type(e).__name__, e)
             print('Failed to load extension {}\n{}'.format(extension, exc))
 # Run the bot object with token
-    bot.run('NDIxNDgwMzM3NDk1OTQ5MzM1.DYWJGA.MTk2shJgLEoC7LWIHot0J0Uzl1M')
+    bot.run(Config.bottoken)
