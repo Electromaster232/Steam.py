@@ -1,6 +1,7 @@
 import discord
 from discord.ext import commands
-import requests
+import aiohttp
+from .utils import Utils
 
 class Steammain:
     """My custom cog that does stuff!"""
@@ -14,12 +15,7 @@ class Steammain:
 
         message = await self.bot.say("Getting Information...")
         # Convert VanityURL to SteamID64
-        response = requests.get("http://api.steampowered.com/ISteamUser/ResolveVanityURL/v0001/?key=FF0EEF99E5BD63F29FC0F938A56F115C&vanityurl=" + vanityurl)
-        resjson = response.json()
-        if resjson['response']['success'] != 1:
-            await self.bot.say("There was an error contacting the Steam API (Converting URL to SteamID64). Error Message: " + resjson['response']['message'])
-            return
-        steamid = resjson['response']['steamid']
+        steamid = Utils.vanitytosteam.id(vanityurl)
         # Get player Info
         userinfo = requests.get("http://api.steampowered.com/ISteamUser/GetPlayerSummaries/v0002/?key=FF0EEF99E5BD63F29FC0F938A56F115C&steamids=" + steamid)
         userjson = userinfo.json()
