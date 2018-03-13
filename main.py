@@ -6,7 +6,7 @@ import traceback
 import sys
 from config import Config
 
-description = '''Steam.py Alpha v2'''
+description = '''Steam.py Alpha v2.1'''
 # Set logging level
 logging.basicConfig(level=logging.ERROR)
 

@@ -26,5 +26,18 @@ class Utils:
         gameid = gameid['appid']
         return gameid
 
+    def idtogame(gameid):
+        """Convert game ID to game name"""
+
+        response = requests.get("http://api.steampowered.com/ISteamApps/GetAppList/v2")
+        response = response.json()
+        response = response['applist']['apps']
+        try:
+            gamename = next((item for item in response if item["appid"] == gameid))
+        except StopIteration:
+            return False
+        gamename = gamename['name']
+        return gamename
+
     def setup(self):
         pass
