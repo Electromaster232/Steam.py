@@ -16,7 +16,7 @@ class GameInfo:
         """Convert game name to ID"""
 
         message = await self.bot.say("Contacting API")
-        appid = Utils.gametoid(gamename)
+        appid = await Utils.gametoid(gamename)
         if not appid:
             await self.bot.say("Their was an issue contacting the Steam API. Ensure the game name is spelled correctly"
                                ", then report this to the bot author if the problem continues.")
@@ -34,7 +34,7 @@ class GameInfo:
 
         message = await self.bot.say("Contacting API...")
         if not game.isdigit():
-            game = Utils.gametoid(game)
+            game = await Utils.gametoid(game)
         if not game:
             await self.bot.say("Their was an issue contacting the Steam API. Ensure the game name is spelled correctly"
                                ", then report this to the bot author if the problem continues.")
