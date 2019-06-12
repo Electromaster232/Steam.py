@@ -27,7 +27,6 @@ def ownercheck(ctx):
 
 @bot.event
 async def on_ready():
-    print("© 2017 Electromaster232")
     print('Logged in as')
     print(bot.user.name)
     print(bot.user.id)
